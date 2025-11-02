@@ -1,0 +1,44 @@
+local CmdrYield=_G.CmdrYield
+
+if type(CmdrYield)~="table" or not (CmdrYield.Loaded and CmdrYield.Initialized) then
+	error("Please download / execute CmdrYield first")
+	return
+end
+
+local Registry=CmdrYield.Registry
+
+local Commands={
+	{
+		Name="health",
+		Description="Gives health to your character",
+		Group="Cheat",
+		Args={
+			{
+				Type="player",
+				Name="Target",
+				Description="The players of health to given."
+			},
+			{
+				Type="number",
+				Name="Amount",
+				Description="The amount to sets health."
+			},
+		},
+		Run=function(context,player,amount)
+			local character=player.Character
+			if not (character and character.Parent and character:FindFirstChildOfClass("Humanoid")) then return "Player character not loaded." end
+			
+			if type(amount)~="number" or amount~=amount then
+				return "Amount must be a positive number."
+			end
+			
+			local humanoid=character:FindFirstChildOfClass("Humanoid")
+			humanoid.MaxHealth=amount
+			humanoid.Health=amount
+		end,
+	}
+}
+
+Registry:RegisterCommandsIn(Commands)
+
+warn("Instal Object Addon Loaded!")
