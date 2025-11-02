@@ -7,6 +7,7 @@ end
 
 local Registry=CmdrYield.Registry
 
+warn("Accept 1")
 local Commands={
 	{
 		Name="health",
@@ -38,7 +39,7 @@ local Commands={
 		end,
 	}
 }
-
+warn("Accept 2")
 Registry:RegisterCommandsIn(Commands)
 
 warn("Instal Object Addon Loaded!")
